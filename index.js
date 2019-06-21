@@ -61,9 +61,19 @@ class OsmMap {
   }
 }
 
+// onGeohashesInput()
+function onGeohashesInput(text) {
+  geohashes = text.split(',');
+  console.log('geohashes:', geohashes);
+}
 
 // main():
 function main() {
+  // input(type="search"):
+  const input = document.body.querySelector('#input');
+  input.addEventListener('search', () => {
+    onGeohashesInput(input.value);
+  });
   // map:
   map = new OsmMap('map');
   map.show();
