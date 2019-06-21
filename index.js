@@ -32,10 +32,9 @@ class OsmMap {
   }
 
   // show()
-  show(latLng=null, zoom=5) {
+  show(latLng=null, zoom=3) {
     if (latLng == null) {
-      // Tokyo Station.
-      latLng = [35.68123, 139.76712];
+      latLng = [0.0, 0.0];
     }
     this.map.setView(latLng, zoom);
   }
