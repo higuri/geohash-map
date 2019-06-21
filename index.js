@@ -1,9 +1,10 @@
 // index.js
 
 // Note:
-// 'L' is imported with
-// <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js">
-// in index.html
+// - 'L' is imported with
+//   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js">
+//   in index.html
+// - 'decodeToCorners()' is imported from geohash.js.
 
 let map;
 
@@ -45,6 +46,7 @@ class OsmMap {
   // addRect()
   addRect(bounds, label='') {
     const i = this.iRectColors;
+    // TODO: fix tooltip gap.
     L.rectangle(
       bounds, {
         color: this.rectColors[i],
@@ -63,8 +65,12 @@ class OsmMap {
 
 // onGeohashesInput()
 function onGeohashesInput(text) {
-  geohashes = text.split(',');
-  console.log('geohashes:', geohashes);
+  geohashes = text.split(',').map((s) => s.trim());
+  geohashes.forEach((geohash) => {
+    bounds = decodeToCorners(geohash);
+    console.log(geohash, bounds);
+    map.addRect(bounds, geohash);
+  });
 }
 
 // main():
@@ -77,13 +83,6 @@ function main() {
   // map:
   map = new OsmMap('map');
   map.show();
-  // rect:
-  sampleBounds = [
-    [[35.0, 135.0], [37.0, 138.0]],
-    [[35.0, 135.0], [36.0, 136.0]],
-  ];
-  map.addRect(sampleBounds[0], 'Hey!');
-  map.addRect(sampleBounds[1], 'Yo!');
 }
 
 // DOMContentLoaded:

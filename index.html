@@ -19,6 +19,7 @@ html body {
   top: 20px;
   width: 100%;
   height: 30px;
+  z-index: 1000;  /* TODO: cleanup */
 }
 #input {
   position: relative;
@@ -35,7 +36,6 @@ html body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
 }
 </style>
 </head>
@@ -44,6 +44,8 @@ html body {
   <input id="input" type="search" placeholder="geohash1, geohash2, ..."></input>
 </div>
 <div id="map"></div>
+<!-- TODO: use bundler -->
+<script src="./geohash.js"></script>
 <script src="./index.js"></script>
 </body>
 </html>
